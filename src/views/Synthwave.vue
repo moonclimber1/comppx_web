@@ -36,7 +36,9 @@ export default {
     }
 
     const tl = gsap.timeline();
-    tl.add(gsap.delayedCall(0.2, scaleToWindow));
+    tl.add(gsap.delayedCall(0.3, scaleToWindow));
+    tl.add(gsap.delayedCall(1.0, scaleToWindow));
+    tl.add(gsap.delayedCall(2.0, scaleToWindow));
 
     const videoScaleWidth = window.innerWidth / gsap.getProperty("video", "width");
     const videoScaleHeight = window.innerHeight / gsap.getProperty("video", "height");
