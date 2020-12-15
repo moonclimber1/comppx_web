@@ -3,7 +3,7 @@
     <div class="scene">
       <p class="typewriter"></p>
       <img class="oldcomputer" src="@/assets/oldcomputer.png" alt="" />
-      <video autoplay="autoplay">
+      <video id="video" autoplay="autoplay">
         <source src="@/assets/edited.mp4" type="video/mp4" />
       </video>
     </div>
@@ -23,8 +23,7 @@ export default {
   name: "Synthwave",
   components: {},
   mounted() {
-    
-    let scale, imgHeight
+    let scale, imgHeight;
 
     function scaleToWindow() {
       console.log("scaledToWindow");
@@ -45,22 +44,31 @@ export default {
 
     const videoScale = Math.max(videoScaleWidth, videoScaleHeight);
 
-    tl.to("body", { duration: 8.1 });
-    tl.to(".scene", { duration: 15, x: -38, y: 900, scale: videoScale * 1.33, ease: "power2.inOut" });
+    tl.to("body", { duration: 5.5 });
+    tl.to(".scene", { duration: 14, x: -38, y: 900, scale: videoScale * 1.35, ease: "power2.inOut" });
     tl.to("body", { duration: 59 });
     tl.call(scaleBackAnimation);
-    
-    function scaleBackAnimation(){
-        console.log("back animation called");
-        gsap.to(".scene", { duration: 8, x: 0, y: 0, scale: scale,  ease: "power2.inOut" });
+
+    function scaleBackAnimation() {
+      console.log("back animation called");
+      gsap.to(".scene", { duration: 8, x: 0, y: 0, scale: scale, ease: "power2.inOut" });
     }
 
     var options = {
       strings: ["Loading floppy disk...", "Starting Time Machine...", "Turn sound on", "Go wild", ""],
       typeSpeed: 110,
     };
-    var typed = new Typed('.typewriter', options);
+    var typed = new Typed(".typewriter", options);
 
+    document.addEventListener("visibilitychange", onchange);
+    function onchange(evt) {
+      if (document.visibilityState === "visible") {
+        document.getElementById("video").play();
+      } else {
+        document.getElementById("video").pause();
+      }
+     
+    }
   },
 };
 </script>
